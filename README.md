@@ -26,8 +26,8 @@ Python 3.12.7+
 ```
 {
   "0": {
-    "FirstName": "Гусев",
-    "LastName": "Борис",
+    "LastName": "Гусев",
+    "FirstName": "Борис",
     "Gender": "Мужчина",
     "City": "Калуга",
     "Mobile Phone Number": "+73728205291",
@@ -35,8 +35,8 @@ Python 3.12.7+
     "Birth year": 2007
   },
   "1": {
-    "FirstName": "Волынов",
-    "LastName": "Антон",
+    "LastName": "Волынов",
+    "FirstName": "Антон",
     "Gender": "Мужчина",
     "City": "Ростов-на-Дону",
     "Mobile Phone Number": "+72340562966",
@@ -45,8 +45,8 @@ Python 3.12.7+
   },
 ...
   "149": {
-    "FirstName": "Смородинова",
-    "LastName": "Анна",
+    "LastName": "Смородинова",
+    "FirstName": "Анна",
     "Gender": "Женщина",
     "City": "Кисловодск",
     "Mobile Phone Number": "+79136315255",
