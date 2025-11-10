@@ -77,7 +77,7 @@ def genEmail(lastName, firstName, birthyear):
     return email
 
 
-jsonRes={}
+jsonRes=[]
 
 lastNameM = ["Васечкин", "Петров", "Сидоров", "Кожемяков", "Аскользкий", "Баринов", "Волынов", "Гусев", "Деревянко", "Ежов", "Изваров", "Коломыйцев", "Лебедев", "Марков", "Носов", "Котов"]
 firstNameM = ["Василий", "Петр", "Владимир", "Константин", "Борис", "Антон", "Валерий", "Михаил", "Олег", "Александр", "Тимофей", "Максим", "Павел", "Юрий", "Даниил", "Сергей", "Андрей", "Алексей"]
@@ -115,7 +115,7 @@ for i in range(resCount):
     mobPhoneRand = genMobPhoneRand()
     birtyear = genBirthyear()
     email = genEmail(LNRand, FNRand, birtyear)
-    jsonRes[i] = {
+    jsonRes.append({
             "LastName": LNRand,
             "FirstName": FNRand,
             "Gender": gendRand,
@@ -123,7 +123,7 @@ for i in range(resCount):
             "Mobile Phone Number": mobPhoneRand,
             "Email": email,
             "Birth year": birtyear
-            }
+            })
 
 #Вывод результата
 print("JSON:\n")
