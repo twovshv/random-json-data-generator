@@ -1,12 +1,81 @@
 import random as rnd
 import json
 import sys
+import datetime as dt
 
 #Инициализация
 def writeToFile(filePath, text):
     print(f"Производится запись сгенерированного json в файл {filePath}")
     with open(filePath, 'w') as file:
         file.write(text)
+
+def genMobPhoneRand():
+    phoneNum='+7'
+    for i in range(10): phoneNum+=str(rnd.randrange(10))
+    return phoneNum
+
+def genBirthyear():
+    nowYear = dt.datetime.now().year
+    return rnd.randrange(nowYear-100, nowYear+1)
+ 
+def simpleTransliterateRusToEn(word):
+    word = word.lower()
+    dictLiters = {
+            'а':'a', 
+            'б': 'b',
+            'в': 'v',
+            'г': 'g',
+            'д': 'd',
+            'е': 'e',
+            'ё': 'e',
+            'ж': 'zh',
+            'з': 'z',
+            'и': 'i',
+            'й': 'y',
+            'к': 'k',
+            'л': 'l',
+            'м': 'm', 
+            'н': 'n',
+            'о': 'o',
+            'п': 'p',
+            'р': 'r',
+            'с': 's',
+            'т': 't',
+            'у': 'u',
+            'ф': 'f',
+            'х': 'h',
+            'ц': 'c',
+            'ч': 'ch',
+            'ш': 'sh',
+            'щ': 'shch',
+            'ъ': '',
+            'ы': 'y', 
+            'ь': '',
+            'э': 'e', 
+            'ю': 'u',
+            'я': 'ya'
+    }
+    translit=''
+
+    for i in word:
+        translit+=dictLiters[i]
+    
+    return translit
+
+def genEmail(firstName, lastName, birthyear):
+    methodInd = rnd.randrange(3)
+    domain = rnd.choice(("yandex.ru", "mail.ru", "gmail.com"))
+    email = ''
+    match methodInd:
+        case 0:
+            email = simpleTransliterateRusToEn(firstName)+simpleTransliterateRusToEn(lastName[0])+str(birthyear)
+        case 1:
+            email = simpleTransliterateRusToEn(lastName)+simpleTransliterateRusToEn(firstName[0])+str(birthyear)
+        case 2:
+            email = simpleTransliterateRusToEn(firstName)+simpleTransliterateRusToEn(lastName)
+    email+=f"@{domain}"
+    return email
+
 
 jsonRes={}
 
@@ -43,13 +112,17 @@ for i in range(resCount):
         FNRand = rnd.choice(firstNameF)
         LNRand = rnd.choice(lastNameF)
     cityRand = rnd.choice(city)
-    oldRand = rnd.choice(old)
+    mobPhoneRand = genMobPhoneRand()
+    birtyear = genBirthyear()
+    email = genEmail(FNRand, LNRand, birtyear)
     jsonRes[i] = {
             "FirstName": FNRand,
             "LastName": LNRand,
             "Gender": gendRand,
             "City": cityRand,
-            "Old": oldRand
+            "Mobile Phone Number": mobPhoneRand,
+            "Email": email,
+            "Birth year": birtyear
             }
 
 #Вывод результата
