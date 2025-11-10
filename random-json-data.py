@@ -62,27 +62,27 @@ def simpleTransliterateRusToEn(word):
     
     return translit
 
-def genEmail(firstName, lastName, birthyear):
+def genEmail(lastName, firstName, birthyear):
     methodInd = rnd.randrange(3)
     domain = rnd.choice(("yandex.ru", "mail.ru", "gmail.com"))
     email = ''
     match methodInd:
         case 0:
-            email = simpleTransliterateRusToEn(firstName)+simpleTransliterateRusToEn(lastName[0])+str(birthyear)
-        case 1:
             email = simpleTransliterateRusToEn(lastName)+simpleTransliterateRusToEn(firstName[0])+str(birthyear)
+        case 1:
+            email = simpleTransliterateRusToEn(firstName)+simpleTransliterateRusToEn(lastName[0])+str(birthyear)
         case 2:
-            email = simpleTransliterateRusToEn(firstName)+simpleTransliterateRusToEn(lastName)
+            email = simpleTransliterateRusToEn(lastName)+simpleTransliterateRusToEn(firstName)
     email+=f"@{domain}"
     return email
 
 
 jsonRes={}
 
-firstNameM = ["Васечкин", "Петров", "Сидоров", "Кожемяков", "Аскользкий", "Баринов", "Волынов", "Гусев", "Деревянко", "Ежов", "Изваров", "Коломыйцев", "Лебедев", "Марков", "Носов", "Котов"]
-lastNameM = ["Василий", "Петр", "Владимир", "Константин", "Борис", "Антон", "Валерий", "Михаил", "Олег", "Александр", "Тимофей", "Максим", "Павел", "Юрий", "Даниил", "Сергей", "Андрей", "Алексей"]
-firstNameF = ["Анютова", "Котейкина", "Сокольникова", "Мясоедова", "Лопатина", "Зарубина", "Смородинова", "Павлова", "Кузнецова", "Сидорова", "Мельникова", "Виноградова", "Морозова", "Ковалёва"]
-lastNameF = ["Елена", "Ирина", "Мария", "Юлия", "Анастасия", "Виктория", "Екатерина", "Дарья", "Ирина", "Елизавета", "Лариса", "Вера",  "Анна", "Любовь", "Людмила", "Надежда", "Наталья", "Ольга", "Нина"]
+lastNameM = ["Васечкин", "Петров", "Сидоров", "Кожемяков", "Аскользкий", "Баринов", "Волынов", "Гусев", "Деревянко", "Ежов", "Изваров", "Коломыйцев", "Лебедев", "Марков", "Носов", "Котов"]
+firstNameM = ["Василий", "Петр", "Владимир", "Константин", "Борис", "Антон", "Валерий", "Михаил", "Олег", "Александр", "Тимофей", "Максим", "Павел", "Юрий", "Даниил", "Сергей", "Андрей", "Алексей"]
+lastNameF = ["Анютова", "Котейкина", "Сокольникова", "Мясоедова", "Лопатина", "Зарубина", "Смородинова", "Павлова", "Кузнецова", "Сидорова", "Мельникова", "Виноградова", "Морозова", "Ковалёва"]
+firstNameF = ["Елена", "Ирина", "Мария", "Юлия", "Анастасия", "Виктория", "Екатерина", "Дарья", "Ирина", "Елизавета", "Лариса", "Вера",  "Анна", "Любовь", "Людмила", "Надежда", "Наталья", "Ольга", "Нина"]
 city = ["Воронеж", "Москва", "Санкт-Петербург", "Волгоград", "Кисловодск", "Белгород", "Калуга", "Новосибирск", "Самара", "Казань", "Челябинск", "Ростов-на-Дону", "Уфа", "Екатеринбург", "Омск", "Нижний Новгород"]
 old = range(101)
 gender = ["Мужчина", "Женщина"]
@@ -106,18 +106,18 @@ print(f"ARGS:\n\tcount:{resCount}\n\tfilePath:{filePath}")
 for i in range(resCount):
     gendRand = rnd.choice(gender)
     if gendRand == gender[0]:
-        FNRand = rnd.choice(firstNameM)
         LNRand = rnd.choice(lastNameM)
+        FNRand = rnd.choice(firstNameM)
     else:
-        FNRand = rnd.choice(firstNameF)
         LNRand = rnd.choice(lastNameF)
+        FNRand = rnd.choice(firstNameF)
     cityRand = rnd.choice(city)
     mobPhoneRand = genMobPhoneRand()
     birtyear = genBirthyear()
-    email = genEmail(FNRand, LNRand, birtyear)
+    email = genEmail(LNRand, FNRand, birtyear)
     jsonRes[i] = {
-            "FirstName": FNRand,
             "LastName": LNRand,
+            "FirstName": FNRand,
             "Gender": gendRand,
             "City": cityRand,
             "Mobile Phone Number": mobPhoneRand,
