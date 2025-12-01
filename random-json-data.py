@@ -2,6 +2,7 @@ import random as rnd
 import json
 import sys
 import datetime as dt
+import argparse 
 
 #Инициализация
 def writeToFile(filePath, text):
@@ -88,18 +89,19 @@ old = range(101)
 gender = ["Мужчина", "Женщина"]
 
 #Работа с аргументами
-resCount = 1
-filePath = False
-try:
-    args = sys.argv
-    for i, el in enumerate(args):
-        if "--count" == args[i].split("=")[0]:
-            resCount = int(args[i].split("=")[1])
-        elif "--file" == args[i].split("=")[0]:
-            filePath = args[i].split("=")[1]
-except IndexError:
-    resCount = 1
-    filePath = False
+parser = argparse.ArgumentParser(
+            description='',
+            formatter_class=argparse.RawDescriptionHelpFormatter,
+            epilog="""
+                   Примеры использования:
+                    """
+        )        
+parser.add_argument('--count', required=False, type=int, default=1, help='Количество объектов в выходном JSON')
+parser.add_argument('--file', required=False, type=str, help='Путь к файлу, куда требуется записать json')
+args = parser.parse_args()
+resCount=args.count
+filePath=args.file
+
 print(f"ARGS:\n\tcount:{resCount}\n\tfilePath:{filePath}")
 
 #Генерация
