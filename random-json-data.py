@@ -60,7 +60,7 @@ def simpleTransliterateRusToEn(word):
             'я': 'ya'
     }
     translit=''
-
+    
     for i in word:
         translit+=dictLiters[i]
     
@@ -81,19 +81,16 @@ def genEmail(lastName, firstName, birthyear):
     email+=f"@{domain}"
     return email
 
+def readFile(path):
+    lst=[]
+    with open(path, 'r', encoding='utf-8') as f:
+        for i in f.readlines():
+            lst.append(i.replace('\n',''))
+    return lst
 
 def main():
-     
-    jsonRes=[]
-    lastNameM = ["Васечкин", "Петров", "Сидоров", "Кожемяков", "Аскользкий", "Баринов", "Волынов", "Гусев", "Деревянко", "Ежов", "Изваров", "Коломыйцев", "Лебедев", "Марков", "Носов", "Котов"]
-    firstNameM = ["Василий", "Петр", "Владимир", "Константин", "Борис", "Антон", "Валерий", "Михаил", "Олег", "Александр", "Тимофей", "Максим", "Павел", "Юрий", "Даниил", "Сергей", "Андрей", "Алексей"]
-    lastNameF = ["Анютова", "Котейкина", "Сокольникова", "Мясоедова", "Лопатина", "Зарубина", "Смородинова", "Павлова", "Кузнецова", "Сидорова", "Мельникова", "Виноградова", "Морозова", "Ковалёва"]
-    firstNameF = ["Елена", "Ирина", "Мария", "Юлия", "Анастасия", "Виктория", "Екатерина", "Дарья", "Ирина", "Елизавета", "Лариса", "Вера",  "Анна", "Любовь", "Людмила", "Надежда", "Наталья", "Ольга", "Нина"]
-    city = ["Воронеж", "Москва", "Санкт-Петербург", "Волгоград", "Кисловодск", "Белгород", "Калуга", "Новосибирск", "Самара", "Казань", "Челябинск", "Ростов-на-Дону", "Уфа", "Екатеринбург", "Омск", "Нижний Новгород"]
-    old = range(101)
-    gender = ["Мужчина", "Женщина"]
-
-   #Работа с аргументами
+   
+    #Работа с аргументами
     parser = argparse.ArgumentParser(
                 description='',
                 formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -108,6 +105,17 @@ def main():
     filePath=args.file
 
     print(f"ARGS:\n\tcount:{resCount}\n\tfilePath:{filePath}")
+
+ 
+    #Инициализация переменных
+    jsonRes=[]
+    lastNameM = readFile('sourceData/lastNameM')
+    firstNameM = readFile('sourceData/firstNameM')
+    lastNameF = readFile('sourceData/lastNameF')
+    firstNameF = readFile('sourceData/firstNameF')
+    city = readFile('sourceData/city')
+    old = range(101)
+    gender = ["Мужчина", "Женщина"]
 
     #Генерация
     for i in range(resCount):
@@ -143,4 +151,4 @@ if __name__=="__main__":
     try:
         main()
     except Exception as E:
-        print(f"Неизвестная ошибка: {e}")
+        print(f"Неизвестная ошибка: {E}")
